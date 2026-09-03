@@ -1,0 +1,67 @@
+{
+  "version": "1.0",
+  "project": "example-product",
+  "generated_at": "2026-09-04T00:00:00Z",
+  "assets": [
+    {
+      "id": "hero-product-demo",
+      "semantic_type": "product_ui",
+      "medium": "video",
+      "role": ["primary_visual", "product_demo"],
+      "file": "public/assets/hero-product-demo.webm",
+      "source": {
+        "type": "existing_project",
+        "original": "marketing/demo/final.webm"
+      },
+      "authenticity": "factual",
+      "license": {
+        "status": "owned"
+      },
+      "production_status": "production",
+      "treatment": {
+        "poster": "public/assets/hero-product-demo-poster.webp",
+        "desktop_crop": "16:9"
+      },
+      "responsive": {
+        "mobile": "public/assets/hero-product-demo-poster.webp"
+      },
+      "selection_reason": [
+        "Shows the actual core product interaction",
+        "Communicates more effectively than an abstract hero illustration"
+      ]
+    },
+    {
+      "id": "commuting-context",
+      "semantic_type": "photography",
+      "medium": "raster_image",
+      "role": ["emotional_context", "supporting_visual"],
+      "file": "public/assets/commuting-context.avif",
+      "source": {
+        "type": "stock",
+        "provider": "example-stock-provider",
+        "url": "https://example.com/asset/123",
+        "creator": "Example Creator",
+        "retrieved_at": "2026-09-04"
+      },
+      "authenticity": "representational",
+      "license": {
+        "status": "permitted_commercial_use",
+        "name": "Example stock license",
+        "url": "https://example.com/license",
+        "attribution_required": false
+      },
+      "production_status": "production",
+      "treatment": {
+        "original_ratio": "3:2",
+        "desktop_crop": "16:9",
+        "mobile_crop": "4:5",
+        "focal_point": "68% 42%"
+      },
+      "selection_reason": [
+        "Provides usable negative space for copy",
+        "Warm natural light matches the selected photographic direction",
+        "Subject remains legible in the mobile crop"
+      ]
+    }
+  ]
+}
