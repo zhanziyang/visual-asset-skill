@@ -43,7 +43,7 @@ function semanticGuess(relativePath, medium) {
   const value = relativePath.toLowerCase();
   const has = (...terms) => terms.some((term) => value.includes(term));
 
-  if (has('logo', 'wordmark', 'brand', 'badge', 'partner', 'press')) {
+  if (has('logo', 'wordmark', 'brand', 'badge', 'partner', 'press', 'app-icon')) {
     return 'brand_asset';
   }
   if (has('screenshot', 'screen-shot', 'screen_', 'dashboard', 'product-ui', 'app-ui')) {
@@ -63,6 +63,9 @@ function semanticGuess(relativePath, medium) {
   }
   if (has('illustration', 'artwork', 'mascot', 'character')) {
     return 'illustration';
+  }
+  if (has('/icon/', '/icons/', 'icon-', '-icon', 'glyph', 'symbol-')) {
+    return 'iconography';
   }
   if (has('texture', 'noise', 'grain', 'pattern', 'paper')) {
     return 'decorative_texture';

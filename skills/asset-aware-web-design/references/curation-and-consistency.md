@@ -14,7 +14,7 @@ The search/generation brief should include:
 - desktop and mobile ratios;
 - preferred subject position and text-safe zone;
 - color/lighting constraints;
-- source and license constraints.
+- source-mode constraints and, for production, license constraints.
 
 ## 2. Inspect visually
 
@@ -29,6 +29,7 @@ Do not rank from metadata alone. When vision is available, inspect each candidat
 - lighting, temperature, and contrast;
 - camera/perspective language;
 - illustration stroke, geometry, and texture;
+- icon stroke/fill logic, optical size, dimensionality, and family coverage;
 - 3D material and lighting language;
 - motion pacing and loop quality;
 - accessible readability when text is embedded;
@@ -50,7 +51,28 @@ Evaluate it inside the intended composition:
 - Does it remain legible or meaningful on mobile?
 - Does it create a stronger layout than existing alternatives?
 
-## 4. Set-level consistency
+## 4. Curate the treatment after the source
+
+The strongest source file can still produce a weak page when it is integrated without art direction.
+
+For primary photography or raster illustration, compare the clean source treatment with meaningfully different art-direction options when the answer is not obvious. Review each option with real copy, controls, and target viewport dimensions.
+
+Evaluate:
+
+- crop and scale as hierarchy, not only fit;
+- subject, negative space, and protected factual content;
+- global and local tonal separation;
+- whether color treatment joins the page palette without becoming a generic tint;
+- edge behavior: bleed, hard frame, mask, cutout, fade, overlap, or clean evidence;
+- material and depth relationship to the interface;
+- text, caption, diagram, and control placement;
+- whether the treatment needs a derived file, runtime implementation, or both;
+- whether desktop and mobile need different crops or derivatives;
+- whether the treatment preserves authenticity.
+
+`object-fit`, a border radius, a shadow, or one identical filter across the set is not a treatment comparison. Read [image-art-direction.md](image-art-direction.md) for the full workflow and stopping condition.
+
+## 5. Set-level consistency
 
 After selecting multiple assets, audit the complete set across:
 
@@ -70,7 +92,7 @@ After selecting multiple assets, audit the complete set across:
 
 Do not combine unrelated high-quality assets merely because each is attractive individually.
 
-## 5. Responsive variants
+## 6. Responsive variants
 
 For primary raster/video assets, record:
 
@@ -86,11 +108,11 @@ For primary raster/video assets, record:
 
 Generate a separate mobile asset when cropping would destroy meaning or composition.
 
-## 6. Rejection reasons
+## 7. Rejection reasons
 
 Record material rejection reasons when useful:
 
-- license unclear;
+- license unclear for production use;
 - low resolution;
 - weak mobile crop;
 - subject conflicts with text;
@@ -99,4 +121,6 @@ Record material rejection reasons when useful:
 - obvious generation artifacts;
 - factual ambiguity;
 - repetitive with another section;
+- treatment remains indistinguishable from dry source-file placement;
+- treatment is attractive but unrelated to the image's communication role;
 - performance cost not justified.

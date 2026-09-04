@@ -5,7 +5,7 @@ import path from 'node:path';
 import process from 'node:process';
 
 const SEMANTIC_TYPES = new Set([
-  'product_ui', 'product_object', 'person_identity', 'brand_asset',
+  'product_ui', 'product_object', 'person_identity', 'brand_asset', 'iconography',
   'photography', 'illustration', 'video', 'motion_graphic', 'diagram',
   'data_visualization', 'device_mockup', 'spatial_3d',
   'decorative_texture', 'procedural_visual', 'typography', 'audio'
@@ -33,6 +33,10 @@ const LICENSE_STATUS = new Set([
   'owned', 'official_permitted', 'permitted_commercial_use',
   'public_domain', 'open_source', 'attribution_required', 'unknown',
   'not_applicable'
+]);
+
+const TREATMENT_IMPLEMENTATIONS = new Set([
+  'runtime', 'derived_asset', 'mixed'
 ]);
 
 function parseArgs(argv) {
@@ -95,6 +99,60 @@ async function main() {
     const sourceType = asset.source?.type;
     const production = asset.production_status === 'production';
     const licenseStatus = asset.license?.status;
+    const integratedRasterArtwork = (
+      ['photography', 'illustration'].includes(asset.semantic_type)
+      && asset.medium === 'raster_image'
+      && asset.production_status !== 'reference_only'
+    );
+
+    if (integratedRasterArtwork) {
+      const treatment = asset.treatment;
+      pushIf(!treatment || typeof treatment !== 'object', errors, `${at}.treatment is required for integrated raster photography or illustration.`);
+      if (treatment && typeof treatment === 'object') {
+        pushIf(
+          typeof treatment.strategy !== 'string' || !treatment.strategy.trim(),
+          errors,
+          `${at}.treatment.strategy is required for integrated raster photography or illustration.`
+        );
+        pushIf(
+          !TREATMENT_IMPLEMENTATIONS.has(treatment.implementation),
+          errors,
+          `${at}.treatment.implementation must be runtime, derived_asset, or mixed.`
+        );
+        pushIf(
+          !Array.isArray(treatment.operations) || treatment.operations.length === 0,
+          errors,
+          `${at}.treatment.operations must be a non-empty array.`
+        );
+
+        const derived = ['derived_asset', 'mixed'].includes(treatment.implementation);
+        pushIf(
+          derived && (typeof treatment.source_file !== 'string' || !treatment.source_file),
+          errors,
+          `${at}.treatment.source_file is required for derived_asset or mixed treatment.`
+        );
+
+        const operations = Array.isArray(treatment.operations)
+          ? treatment.operations.join(' ').toLowerCase()
+          : '';
+        const riskyFactualTreatment = (
+          asset.authenticity === 'factual'
+          && /(cutout|collage|composit|generative|fill|overlay|remove|relight)/.test(operations)
+        );
+        pushIf(
+          riskyFactualTreatment
+            && (!Array.isArray(treatment.truth_constraints) || treatment.truth_constraints.length === 0),
+          errors,
+          `${at}.treatment.truth_constraints is required for factual photography with meaning-sensitive operations.`
+        );
+
+        if (typeof treatment.source_file === 'string' && !treatment.source_file.includes('://')) {
+          const sourceAbsolute = path.resolve(projectRoot, treatment.source_file);
+          const sourceExists = await fs.stat(sourceAbsolute).then(() => true).catch(() => false);
+          pushIf(!sourceExists, errors, `${at}.treatment.source_file does not exist under project root: ${treatment.source_file}`);
+        }
+      }
+    }
 
     pushIf(
       production && licenseStatus === 'unknown',

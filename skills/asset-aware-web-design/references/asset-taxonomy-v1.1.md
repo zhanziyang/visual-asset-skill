@@ -12,13 +12,14 @@ The system must:
 - detect asset opportunities during design;
 - distinguish meaningful visuals from supporting treatment and pure decoration;
 - select a semantic asset type before selecting a rendering medium;
+- choose a coherent visual style and placement role independently from medium;
 - prefer authentic evidence where factuality matters;
-- obtain or generate production-safe assets;
+- obtain or generate assets appropriate to the active source mode;
 - curate candidates visually;
 - let selected assets influence layout;
 - save and integrate the actual assets;
 - maintain responsive and cross-section consistency;
-- record provenance, license, transformations, and use.
+- record origin, source mode, transformations, and use; record full license details for production assets.
 
 ## 2. Core capability model
 
@@ -45,6 +46,7 @@ The ability to determine:
 - whether authenticity is factual, representational, illustrative, or decorative;
 - which semantic asset type fits;
 - which medium communicates it best;
+- which visual style and placement make it belong to the interface;
 - which source policy applies;
 - whether the asset should be primary, supporting, or omitted.
 
@@ -56,7 +58,7 @@ The ability to:
 - query external and user-owned sources;
 - generate candidates when permitted;
 - inspect candidates visually;
-- verify production rights;
+- verify production rights when production-ready assets are requested;
 - process and optimize selected assets;
 - place them into the project;
 - implement them responsively;
@@ -71,11 +73,14 @@ Communication goal
 × Asset opportunity
 × Semantic asset type
 × Visual medium
+× Visual style
+× Art direction and treatment
+× Placement and scale
 × Source policy
 × Authenticity
 × Role
 × Responsive behavior
-× Provenance and license
+× Source mode, origin, and production license when applicable
 ```
 
 Do not assume `asset = image file`.
@@ -158,7 +163,7 @@ Choose the medium that best balances:
 - editability;
 - performance;
 - accessibility;
-- licensing risk;
+- source-mode and licensing risk;
 - generation or retrieval cost.
 
 Examples:
@@ -184,9 +189,9 @@ Never silently substitute illustration for evidence.
 - Real metrics are data evidence.
 - Generated concepts are illustrative unless proven otherwise.
 
-### 6.4 Reference breadth, production strictness
+### 6.4 Reference breadth, placeholder disclosure, production strictness
 
-Broad Web material may be inspected as reference. Only production-safe assets may enter the project.
+Broad Web material may be inspected as reference. It may enter a design draft as a disclosed placeholder with lightweight origin tracking. Only production-safe assets may be represented or shipped as production-ready.
 
 ### 6.5 Whitespace is valid
 
@@ -268,7 +273,29 @@ Carries no factual implication. Procedural and generated media are broadly accep
 - Preserve official geometry, proportions, and clear-space guidance.
 - Prefer official vector formats where available.
 
-### 8.5 Photography
+### 8.5 Iconography
+
+**Definition:** Compact symbolic visuals used for actions, navigation, status, repeated categories, feature labels, or lightweight conceptual recognition. Iconography may be 2D, 3D, monochrome, colorful, static, or animated.
+
+**Purpose:** Reduce reading effort, clarify interaction, and create a consistent symbolic language at small or repeated scales.
+
+**Preferred media:** SVG or icon component for interface use; raster only when the style requires texture; Lottie/Rive/animated SVG for meaningful state motion; optimized 3D or pre-rendered 3D for sparse large-format brand moments.
+
+**Source priority:** Existing design system → official platform symbols where applicable → coherent licensed icon family → small compatible custom extension → commissioned or generated non-factual icon set.
+
+**Authenticity:** Normally `illustrative` or `decorative`; a named platform, integration, certification, or company mark is a `brand_asset` and must be factual.
+
+**Production safety:** Verify the family license, attribution, redistribution, modification, font/SVG embedding, model/texture, and animation-runtime terms. Do not treat aggregator availability as permission to use a trademark.
+
+**Rules:**
+
+- Use icons for compact recognition, not as a substitute for Product UI, evidence, diagrams, or explanatory content.
+- Choose one coherent family per role and confirm that it covers the full required concept set.
+- Keep dimensionality, stroke/fill logic, optical size, geometry, palette, perspective, material, lighting, and motion consistent.
+- Do not mix 2D utility icons, 3D icons, emoji, and official brand marks as if they were one family.
+- Use 3D icons only when their display size and brand role justify the asset and performance cost.
+
+### 8.6 Photography
 
 **Definition:** Photographic imagery whose primary value is realism, environment, mood, lifestyle, documentation, or human context.
 
@@ -280,7 +307,7 @@ Carries no factual implication. Procedural and generated media are broadly accep
 
 **Anti-slop rule:** Do not replace meaningful real-world context with a generic gradient, glowing orb, abstract SVG, or generated blob when photography communicates more strongly.
 
-### 8.6 Illustration
+### 8.7 Illustration
 
 **Definition:** Non-photographic visual storytelling, including editorial illustration, mascots, characters, branded artwork, conceptual metaphors, and abstract illustration.
 
@@ -290,7 +317,7 @@ Carries no factual implication. Procedural and generated media are broadly accep
 
 **Rules:** Illustration must not silently replace actual Product UI, official brands, real people, customer evidence, or real data.
 
-### 8.7 Video
+### 8.8 Video
 
 **Definition:** Encoded time-based raster media, including product demos, lifestyle footage, background footage, launch clips, cinematic hero footage, and visual loops.
 
@@ -303,7 +330,7 @@ Carries no factual implication. Procedural and generated media are broadly accep
 - Generated video must not impersonate authentic product footage.
 - Provide poster, reduced-motion, and bandwidth-aware behavior when appropriate.
 
-### 8.8 Motion Graphic / Interactive Motion
+### 8.9 Motion Graphic / Interactive Motion
 
 **Definition:** Time-based visual assets that are not conventional video, such as Lottie, Rive, animated SVG, animated WebP, GIF, animated icons, motion loops, or shader-driven motion.
 
@@ -313,7 +340,7 @@ Carries no factual implication. Procedural and generated media are broadly accep
 
 **Rules:** Prefer scalable and interactive runtime formats over video when they provide material advantages.
 
-### 8.9 Diagram / Explanatory Visual
+### 8.10 Diagram / Explanatory Visual
 
 **Definition:** A visual whose primary purpose is to explain structure, sequence, dependency, causality, comparison, or relationships.
 
@@ -325,7 +352,7 @@ Carries no factual implication. Procedural and generated media are broadly accep
 
 **Rules:** Prefer code rendering when responsiveness, selectable text, accessibility, updateability, or animation matters. Do not substitute decorative illustration when clarity is the objective.
 
-### 8.10 Data Visualization
+### 8.11 Data Visualization
 
 **Definition:** Visual representation of quantitative, geographic, temporal, statistical, network, or metric data.
 
@@ -338,7 +365,7 @@ Carries no factual implication. Procedural and generated media are broadly accep
 - Explicitly classify demonstration or marketing data as mock/demo.
 - Prefer runtime rendering for responsive and interactive charts.
 
-### 8.11 Device / Frame / Mockup
+### 8.12 Device / Frame / Mockup
 
 **Definition:** A presentation shell used to contextualize or contain another asset, such as an iPhone, laptop, browser chrome, desktop window, app window, or device stage.
 
@@ -348,7 +375,7 @@ Carries no factual implication. Procedural and generated media are broadly accep
 
 **Hard rule:** Preserve the distinction between the frame and its content. A frame must not become an excuse to invent fake Product UI.
 
-### 8.12 3D / Spatial Asset
+### 8.13 3D / Spatial Asset
 
 **Definition:** 3D object, product render, icon, illustration, environment, GLB/GLTF model, Spline scene, WebGL object, or spatial interactive scene.
 
@@ -358,7 +385,7 @@ Carries no factual implication. Procedural and generated media are broadly accep
 
 **Rules:** Use only when semantic or aesthetic value justifies implementation and performance cost. Do not add 3D merely because a page feels empty.
 
-### 8.13 Decorative Graphic / Texture
+### 8.14 Decorative Graphic / Texture
 
 **Definition:** Grain, paper, noise, pattern, collage fragment, ornament, border motif, printed texture, or background graphic.
 
@@ -368,7 +395,7 @@ Carries no factual implication. Procedural and generated media are broadly accep
 
 **Rule:** Keep subordinate to meaningful content. Sophisticated texture does not compensate for missing product evidence.
 
-### 8.14 Procedural / Generative Visual
+### 8.15 Procedural / Generative Visual
 
 **Definition:** Runtime-generated visual such as a shader, particle field, mesh gradient, generative lines, noise field, fluid effect, aurora, Voronoi field, dot matrix, interactive Canvas, or WebGL background.
 
@@ -378,7 +405,7 @@ Carries no factual implication. Procedural and generated media are broadly accep
 
 **Core principle:** Procedural assets are valid assets. The failure is not that they are code-generated; the failure is using them as generic filler where a more meaningful asset would communicate better.
 
-### 8.15 Typography Asset
+### 8.16 Typography Asset
 
 **Definition:** Brand, display, body, mono, variable, multilingual, custom-lettering, or numeral font resources.
 
@@ -388,7 +415,7 @@ Carries no factual implication. Procedural and generated media are broadly accep
 
 **Requirements:** Track license, origin, available weights/axes, Web format, fallback, and language coverage. Treat typography as an early asset decision, not a late CSS afterthought.
 
-### 8.16 Audio
+### 8.17 Audio
 
 **Definition:** UI sound, SFX, voiceover, background audio, demo audio, and ambient audio.
 
@@ -446,6 +473,7 @@ MP3, AAC, WAV, OGG, or related formats.
 | Product/Object | Existing, official, stock | Yes | Preserve factual product form |
 | Person/Identity | Real assets, licensed generic photo | Limited | Never invent factual identity/testimonial |
 | Brand Asset | Official, existing | No | Never redraw or fabricate |
+| Iconography | Existing system, coherent icon library, official platform symbols | Yes, for non-factual sets | Do not use in place of evidence or mix unrelated families |
 | Photography | Existing, library, safe Web, stock | Yes | Production rights required |
 | Illustration | Existing, library, stock | Yes | Do not substitute for evidence |
 | Video | Existing, library, stock | Placeholder/mood only | Do not impersonate real footage |
@@ -484,11 +512,12 @@ Evaluate:
 - perspective and camera language;
 - illustration or 3D style;
 - motion character;
+- placement role, scale, focal behavior, and relationship to nearby content;
 - brand fit;
 - set consistency;
 - authenticity;
 - performance;
-- license and attribution requirements.
+- source-mode status, plus license and attribution requirements for production use.
 
 ## 12. Visual-set consistency
 
@@ -509,7 +538,13 @@ Consistency dimensions:
 
 Individually attractive assets can still form an incoherent system.
 
-## 13. Asset processing
+## 13. Image art direction and asset processing
+
+Selecting an image does not make the source file implementation-ready. Prominent photography and raster illustration require an explicit treatment decision in page context.
+
+Choose among deliberate clean evidence, editorial reframe, tonal grade, materialized print, cutout/collage, environmental blend, diagrammatic overlay, motion treatment, or a project-specific recipe. Compare materially different treatments for primary imagery when the strongest direction is not obvious.
+
+`object-fit`, a frame, a shadow, or one generic filter is not sufficient evidence of art direction. The implemented crop, scale, tonal hierarchy, edge behavior, material, depth, text relationship, and responsive behavior must serve the asset's communication role. Read [image-art-direction.md](image-art-direction.md) for the operating rules.
 
 Permitted transformations include:
 
@@ -522,6 +557,8 @@ Permitted transformations include:
 - poster and thumbnail generation;
 - masking and alpha optimization;
 - metadata cleanup.
+
+Preserve the source original when practical and create purpose-named derivatives when the result depends on image-specific grading, masks, cutouts, composites, baked texture, or materially different responsive crops. Runtime treatment is valid when responsive or interactive behavior is the reason for it.
 
 Do not alter factual UI, identities, logos, certification marks, or data.
 
@@ -550,7 +587,8 @@ Every external, generated, or materially transformed asset should record:
 - local file or runtime module;
 - source type and origin;
 - authenticity;
-- license status and attribution;
+- placeholder/production status and origin;
+- license status and attribution when production-ready;
 - production status;
 - transformations;
 - responsive behavior;
@@ -565,8 +603,11 @@ A successful design does not merely contain more assets. It demonstrates that:
 - real evidence was preferred where factuality mattered;
 - code-generated visuals were used when they were the best medium, not as reflexive filler;
 - layout responded to asset composition;
+- selected images were art-directed in context rather than dropped into generic containers;
+- image-specific treatment or derivative work exists in the implementation when the visual direction depends on it;
 - production rights were safe and traceable;
 - the asset set formed one coherent visual world;
+- visual style and placement were chosen deliberately rather than inherited from a provider preview;
 - the implementation used actual project files or runtime visuals;
 - responsive behavior was intentional;
 - generic decoration did not dominate meaningful content.

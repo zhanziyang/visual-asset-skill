@@ -50,6 +50,9 @@ No single medium always wins.
 | Frame actual Product UI | Device/browser mockup plus real screenshot | Fake UI drawn into a mockup |
 | Establish founder/team trust | Real portraits | AI faces or unrelated stock presented as factual |
 | Show a physical product | Photography or accurate 3D | Approximate generated form when accuracy matters |
+| Label repeated actions or simple categories | One coherent 2D icon family; 3D icons only for sparse brand moments | Mixed icon packs, emoji, or feature icons used as evidence |
+| Let users inspect spatial form or configuration | Optimized interactive 3D with a poster fallback | Heavy 3D scene when a fixed render communicates equally well |
+| Explain responsive, editable structure | Code-rendered HTML/SVG/Canvas | Sourced illustration that hides relationships |
 
 ## 4. Section archetypes
 

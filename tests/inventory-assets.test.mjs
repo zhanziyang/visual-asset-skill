@@ -15,13 +15,19 @@ test('inventory classifies common project assets', async () => {
   await fs.writeFile(path.join(root, 'public', 'assets', 'logo.svg'), '<svg/>');
   await fs.writeFile(path.join(root, 'public', 'assets', 'dashboard-screenshot.png'), 'png');
   await fs.writeFile(path.join(root, 'public', 'assets', 'demo.webm'), 'video');
+  await fs.mkdir(path.join(root, 'public', 'assets', 'icons'), { recursive: true });
+  await fs.writeFile(path.join(root, 'public', 'assets', 'icons', 'navigation-arrow.svg'), '<svg/>');
+  await fs.writeFile(path.join(root, 'public', 'assets', 'icons', 'feature-orbit.glb'), '3d');
 
   const { stdout } = await execFileAsync(process.execPath, [script, root]);
   const report = JSON.parse(stdout);
 
-  assert.equal(report.count, 3);
+  assert.equal(report.count, 5);
   const byPath = new Map(report.assets.map((asset) => [asset.path, asset]));
   assert.equal(byPath.get('public/assets/logo.svg').semantic_guess, 'brand_asset');
   assert.equal(byPath.get('public/assets/dashboard-screenshot.png').semantic_guess, 'product_ui');
   assert.equal(byPath.get('public/assets/demo.webm').medium, 'video');
+  assert.equal(byPath.get('public/assets/icons/navigation-arrow.svg').semantic_guess, 'iconography');
+  assert.equal(byPath.get('public/assets/icons/feature-orbit.glb').semantic_guess, 'iconography');
+  assert.equal(byPath.get('public/assets/icons/feature-orbit.glb').medium, '3d');
 });

@@ -52,6 +52,14 @@
       },
       "production_status": "production",
       "treatment": {
+        "strategy": "editorial_reframe",
+        "implementation": "derived_asset",
+        "operations": [
+          "desktop and mobile focal crops",
+          "warm tonal normalization",
+          "AVIF encode"
+        ],
+        "source_file": "assets/source/commuting-context.jpg",
         "original_ratio": "3:2",
         "desktop_crop": "16:9",
         "mobile_crop": "4:5",
