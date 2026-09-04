@@ -198,4 +198,4 @@ Visual Asset Skill asks: What visual material should exist here, how should it b
 
 `v0.1.0` — initial experimental specification and executable skill scaffold.
 
-No open-source license has been selected yet.
+Released under the [MIT License](LICENSE).
